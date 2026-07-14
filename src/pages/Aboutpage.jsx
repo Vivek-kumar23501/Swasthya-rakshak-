@@ -4,7 +4,7 @@ import {
   Compass, Users, Heart, HeartPulse, Eye, Droplet, Stethoscope,
   Code2, Link2, Mail, ArrowRight, CheckCircle2, Quote,
 } from "lucide-react";
-import LandingNavbar from "../section/LandingNavbar";
+import LandingNavbar from "../Components/section/LandingNavbar";
 
  const Aboutpage=()=> {
   const [navOpen, setNavOpen] = useState(false);

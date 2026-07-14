@@ -3,7 +3,7 @@ import {
   FileText, ArrowRight, CheckCircle2,
   Upload, Sparkles, Clock, MonitorSmartphone, Mail,
 } from "lucide-react";
-import LandingNavbar from "../section/LandingNavbar";
+import LandingNavbar from "../Components/section/LandingNavbar";
 
 const  ServicesPage=()=> {
   const previewModules = [

@@ -1,9 +1,9 @@
-import Howitwork from "../section/Howitwork"
+import Howitwork from "../Components/section/Howitwork"
 
-import LandingHero from "../section/LandingHero"
-import LandingNavbar from "../section/LandingNavbar"
-import LandingServices from "../section/LandingServices"
-import TestimonialsSection from "../section/TestimonialsSection"
+import LandingHero from "../Components/section/LandingHero"
+import LandingNavbar from "../Components/section/LandingNavbar"
+import LandingServices from "../Components/section/LandingServices"
+import TestimonialsSection from "../Components/section/TestimonialsSection"
 
 const LandingPages=()=>{
     return(

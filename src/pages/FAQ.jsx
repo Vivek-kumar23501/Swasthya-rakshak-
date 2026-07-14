@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
-import LandingNavbar from "../section/LandingNavbar";
-import LandingFooter from "../section/Landingfooter";
+import LandingNavbar from "../Components/section/LandingNavbar";
+import LandingFooter from "../Components/section/Landingfooter";
 
 const faqs = [
   {

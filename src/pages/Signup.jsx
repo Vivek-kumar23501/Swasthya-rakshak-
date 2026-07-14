@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { User, Mail, Phone, Lock, HeartPulse } from "lucide-react";
-import LandingNavbar from "../section/LandingNavbar";
-import LandingFooter from "../section/Landingfooter";
+import LandingNavbar from "../Components/section/LandingNavbar";
+import LandingFooter from "../Components/section/Landingfooter";
 
 const Signup = () => {
   return (

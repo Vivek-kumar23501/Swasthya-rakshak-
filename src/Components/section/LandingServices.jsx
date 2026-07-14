@@ -9,7 +9,7 @@ const services = [
     title: "Heart Disease",
     description:
       "Predict cardiovascular risk using clinical parameters.",
-    link: "/",
+    link: "/login",
   },
   {
     icon: Droplet,
@@ -17,7 +17,7 @@ const services = [
     iconBg: "bg-cyan-50",
     title: "Diabetes",
     description: "Assess your diabetes risk with glucose & BMI data.",
-    link: "/",
+    link: "/login",
   },
   {
     icon: Ribbon,
@@ -26,7 +26,7 @@ const services = [
     title: "Breast Cancer",
     description:
       "Early screening using tissue measurement data.",
-    link: "/",
+    link: "/login",
   },
   {
     icon: Eye,
@@ -34,7 +34,7 @@ const services = [
     iconBg: "bg-blue-50",
     title: "Eye Disease",
     description: "Detect diabetic retinopathy via retinal image upload.",
-    link: "/",
+    link: "/login",
   },
 ];
 

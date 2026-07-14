@@ -13,7 +13,7 @@ const LandingPages=()=>{
 <LandingServices/>
 <Howitwork/>
 <TestimonialsSection/>
-<LandingFooter/>
+
 
 </>
     )

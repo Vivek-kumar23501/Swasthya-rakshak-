@@ -35,7 +35,7 @@ const LandingHero = () => {
 
             {/* Buttons */}
             <div className="flex items-center gap-4 mb-7">
-              <NavLink to="/get-started">
+              <NavLink to="/login">
                 <button className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-medium shadow-md shadow-blue-200 hover:bg-blue-700 hover:shadow-lg transition duration-300">
                   <Zap className="w-4 h-4" fill="white" />
                   Get Started

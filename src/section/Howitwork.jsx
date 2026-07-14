@@ -4,7 +4,6 @@ import {
   Cpu,
   BarChart3,
   Compass,
-  Star,
 } from "lucide-react";
 
 const steps = [
@@ -42,15 +41,15 @@ const steps = [
 
 const Howitwork = () => {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <p className="text-xs font-semibold text-emerald-500 tracking-wide mb-2">
+        <div className="text-center mb-12 sm:mb-14">
+          <p className="text-xs sm:text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-2">
             Simple Process
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
             How It Works
           </h2>
 
@@ -60,31 +59,36 @@ const Howitwork = () => {
         </div>
 
         {/* Steps */}
-        <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-10 md:gap-0">
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-dotted border-t-2 border-dashed border-gray-200 -z-0" />
+        <div className="relative flex flex-col md:flex-row items-center md:items-center justify-between gap-10 md:gap-0">
+          {/* Desktop Connecting Line */}
+          <div className="hidden md:block absolute top-8 left-0 right-0 border-t-2 border-dashed border-gray-200 -z-10"></div>
 
           {steps.map((step, index) => {
             const Icon = step.icon;
+
             return (
               <div
                 key={index}
-                className="relative z-10 flex flex-col items-center text-center flex-1 px-2"
+                className="relative z-10 flex flex-col items-center text-center flex-1 px-3"
               >
+                {/* Icon */}
                 <div className="relative mb-4">
-                  <div className="w-16 h-16 rounded-full border-2 border-blue-500 bg-white flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-blue-600" />
+                  <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-2 border-blue-500 bg-white flex items-center justify-center">
+                    <Icon className="w-7 h-7 text-blue-600" />
                   </div>
-                  <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
+
+                  <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
                     {step.number}
                   </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-slate-900 mb-1.5">
+                {/* Title */}
+                <h3 className="text-base font-bold text-slate-900 mb-2">
                   {step.title}
                 </h3>
 
-                <p className="text-xs text-gray-500 max-w-[160px]">
+                {/* Description */}
+                <p className="text-sm text-gray-500 max-w-[220px] mx-auto leading-relaxed">
                   {step.description}
                 </p>
               </div>

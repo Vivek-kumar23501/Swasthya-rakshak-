@@ -1,20 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingNavbar from "./section/LandingNavbar";
-import LandingHero from "./section/LandingHero";
-import LandingServices from "./section/LandingServices";
-import Howitwork from "./section/Howitwork";
-import TestimonialsSection from "./section/TestimonialsSection";
-import LandingFooter from "./section/LandingFooter";
+
+import LandingPages from "./pages/LandingPages";
 
 
 const Home = () => (
   <>
-    <LandingNavbar/>
-    <LandingHero/>
-    <LandingServices/>
-    <Howitwork/>
-    <TestimonialsSection/>
-    <LandingFooter/>
+   <LandingPages/>
    
   </>
 );

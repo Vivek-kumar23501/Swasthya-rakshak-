@@ -40,50 +40,52 @@ const services = [
 
 const LandingServices = () => {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold text-blue-600 tracking-wide mb-2">
+        <div className="text-center mb-10 sm:mb-12">
+          <p className="text-xs sm:text-sm font-semibold text-blue-600 tracking-wider uppercase mb-2">
             Our Services
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 leading-tight">
             AI-Powered Disease Prediction
           </h2>
 
-          <p className="text-sm text-gray-500 max-w-md mx-auto">
-            Select any module below to check your health risk in under 2 minutes.
+          <p className="text-sm text-gray-500 max-w-lg mx-auto leading-relaxed">
+            Select any module below to check your health risk in under
+            2 minutes.
           </p>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((service, index) => {
             const Icon = service.icon;
+
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition duration-300"
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <div
-                  className={`w-10 h-10 rounded-full ${service.iconBg} flex items-center justify-center mb-4`}
+                  className={`w-12 h-12 ${service.iconBg} rounded-full flex items-center justify-center mb-5`}
                 >
-                  <Icon className={`w-5 h-5 ${service.iconColor}`} />
+                  <Icon className={`w-6 h-6 ${service.iconColor}`} />
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 mb-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {service.title}
                 </h3>
 
-                <p className="text-xs text-gray-500 mb-5 leading-relaxed">
+                <p className="text-sm text-gray-500 leading-relaxed mb-6">
                   {service.description}
                 </p>
 
                 <NavLink to={service.link}>
-                  <button className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-600 text-blue-600 text-xs font-medium hover:bg-blue-600 hover:text-white transition duration-300">
+                  <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-600 hover:text-white transition-all duration-300">
                     Start Prediction
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </NavLink>
               </div>
@@ -95,4 +97,4 @@ const LandingServices = () => {
   );
 };
 
-export default LandingServices
+export default LandingServices;

@@ -6,7 +6,7 @@ import {
   Send,
   HeartPulse,
 } from "lucide-react";
-import LandingFooter from "../Components/section/Landingfooter";
+import LandingFooter from "../Components/section/LandingFooter";
 import LandingNavbar from "../Components/section/LandingNavbar";
 
 const Contact = () => {

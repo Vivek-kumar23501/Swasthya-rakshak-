@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import HealthTips from "./pages/HealthTips";
 
 
 
@@ -24,7 +25,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/faq" element={<FAQ/>}/>
         <Route path="/contact" element={<Contact/>}/>
-        
+        <Route path="/health-tips" element={<HealthTips/>}/>
       </Routes>
     </BrowserRouter>
   );

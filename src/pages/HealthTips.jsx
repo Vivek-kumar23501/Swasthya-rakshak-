@@ -8,6 +8,8 @@ import {
   ShieldCheck,
   Stethoscope,
 } from "lucide-react";
+import LandingFooter from "../Components/section/LandingFooter";
+import LandingNavbar from "../Components/section/LandingNavbar";
 
 const tips = [
   {
@@ -50,6 +52,8 @@ const tips = [
 
 const HealthTips = () => {
   return (
+    <>
+    <LandingNavbar/>
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-20">
@@ -110,6 +114,8 @@ const HealthTips = () => {
         </div>
       </section>
     </div>
+    <LandingFooter/>
+    </>
   );
 };
 

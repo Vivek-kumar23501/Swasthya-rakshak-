@@ -1,4 +1,5 @@
 import Howitwork from "../section/Howitwork"
+import LandingFooter from "../section/Landingfooter"
 import LandingHero from "../section/LandingHero"
 import LandingNavbar from "../section/LandingNavbar"
 import LandingServices from "../section/LandingServices"
@@ -12,6 +13,7 @@ const LandingPages=()=>{
 <LandingServices/>
 <Howitwork/>
 <TestimonialsSection/>
+<LandingFooter/>
 
 </>
     )

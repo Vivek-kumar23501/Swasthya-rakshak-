@@ -1,26 +1,30 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LandingPages from "./pages/LandingPages";
+import AboutPage from "./pages/Aboutpage";
+import ServicesPage from "./pages/ServicesPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
 
 
-const Home = () => (
-  <>
-   <LandingPages/>
-   
-  </>
-);
 
-const About = () => <h1 className="p-10 text-3xl">About Page</h1>;
-const Services = () => <h1 className="p-10 text-3xl">Services Page</h1>;
-const Login = () => <h1 className="p-10 text-3xl">Login Page</h1>;
-const Signup = () => <h1 className="p-10 text-3xl">Signup Page</h1>;
+
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-       
+        <Route path="/" element={<LandingPages />} />
+        <Route path="/about" element={<AboutPage/>}/>
+        <Route path="/services"  element={<ServicesPage/>}/>
+        <Route path="/login"  element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/faq" element={<FAQ/>}/>
+        <Route path="/contact" element={<Contact/>}/>
+        
       </Routes>
     </BrowserRouter>
   );

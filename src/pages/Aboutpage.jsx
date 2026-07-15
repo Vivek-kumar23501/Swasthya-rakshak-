@@ -13,8 +13,8 @@ import LandingNavbar from "../Components/section/LandingNavbar";
     { year: "2023", title: "Idea Born", desc: "Identified the gap in accessible preliminary health screening.", color: "bg-amber-400" },
     { year: "2024", title: "Research Phase", desc: "Developed ML models for diabetes, heart disease, cancer prediction.", color: "bg-sky-400" },
     { year: "2024", title: "Development", desc: "Built the full-stack platform with React, Node.js, and Flask.", color: "bg-teal-400" },
-    { year: "2025", title: "AI Integration", desc: "Integrated AI Health Assistant and Deep Learning modules.", color: "bg-emerald-400" },
-    { year: "2025", title: "Launch Ready", desc: "Swasthya Rakshak ready for real-world healthcare impact.", color: "bg-rose-400" },
+    { year: "2026", title: "AI Integration", desc: "Integrated AI Health Assistant and Deep Learning modules.", color: "bg-emerald-400" },
+    { year: "2027", title: "Launch Ready", desc: "Swasthya Rakshak ready for real-world healthcare impact.", color: "bg-rose-400" },
   ];
 
   const stats = [

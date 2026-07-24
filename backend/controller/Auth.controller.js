@@ -1,90 +1,192 @@
 import User from "../model/Auth.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import sendOTP from "../utils/sendEmail.js";
 
+// ========================= SIGNUP =========================
 const signup = async (req, res) => {
     try {
         const { fullname, email, mobile, password } = req.body;
-        
 
+        // Generate OTP
+        const otp = Math.floor(1000 + Math.random() * 9000);
+        const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
+
+        // Check if email already exists
         const emailExist = await User.findOne({ email });
+
         if (emailExist) {
-            return res.status(400).json({
-                message: "Email already registered"
+
+            // If user is already verified
+            if (emailExist.isVerified) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Email already registered"
+                });
+            }
+
+            // Update OTP for unverified user
+            emailExist.otp = otp;
+            emailExist.otpExpiry = otpExpiry;
+
+            await emailExist.save();
+
+            await sendOTP(email, otp);
+
+            return res.status(200).json({
+                success: true,
+                message: "OTP resent successfully."
             });
         }
 
+        // Check mobile
         const mobileExist = await User.findOne({ mobile });
+
         if (mobileExist) {
             return res.status(400).json({
+                success: false,
                 message: "Mobile number already in use"
             });
         }
 
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const payload = {
+        // Send OTP first
+        await sendOTP(email, otp);
+
+        // Save user
+        await User.create({
             fullname,
             email,
             mobile,
-            password: hashedPassword
-        };
-
-        const user = await User.create(payload);
+            password: hashedPassword,
+            otp,
+            otpExpiry,
+            isVerified: false
+        });
 
         res.status(201).json({
-            message: "User signup successfully",
-            
+            success: true,
+            message: "OTP sent to your email."
         });
 
     } catch (err) {
         res.status(500).json({
+            success: false,
             message: err.message
         });
     }
 };
 
-const login=async(req,res)=>{
-
+// ========================= VERIFY OTP =========================
+const verifyOTP = async (req, res) => {
     try {
-        const {email,password}=req.body
 
-        const emailexist=await User.findOne({email})
-        if(!emailexist)
+        const { email, otp } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        if (user.otp !== Number(otp)) {
             return res.status(400).json({
-        message:"email not exist signup first "
-            })
-            const payload = {
-    id: emailexist._id,
-    fullname: emailexist.fullname,
-    email: emailexist.email,
-    mobile:emailexist.mobile
+                message: "Invalid OTP"
+            });
+        }
+
+        if (user.otpExpiry < new Date()) {
+            return res.status(400).json({
+                message: "OTP expired"
+            });
+        }
+
+        user.isVerified = true;
+        user.otp = null;
+        user.otpExpiry = null;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Email verified successfully"
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
 };
 
-            const isLogin = await bcrypt.compare(password, emailexist.password);
-          if(!isLogin)
+// ========================= LOGIN =========================
+const login = async (req, res) => {
+
+    try {
+
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
             return res.status(400).json({
-        message:"invalid credentials"})
+                message: "Email not registered"
+            });
+        }
 
-      const token = jwt.sign(
-    payload,
-    process.env.JWT_SECRET,
-    {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    }
-);
+        // Check email verification
+        if (!user.isVerified) {
+            return res.status(400).json({
+                message: "Please verify your email first."
+            });
+        }
 
-res.status(200).json({message:"login successs" ,token})
+        // Check password
+        const isLogin = await bcrypt.compare(password, user.password);
 
+        if (!isLogin) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            });
+        }
 
-        
-    } 
-    catch (err) {
+        // JWT Payload
+        const payload = {
+            id: user._id,
+            fullname: user.fullname,
+            email: user.email,
+            mobile: user.mobile
+        };
+
+        // Generate Token
+        const token = jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            {
+                expiresIn: process.env.JWT_EXPIRES_IN
+            }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token
+        });
+
+    } catch (err) {
+
         res.status(500).json({
-            message:err.message
-        })
-    }
-    
-}
+            success: false,
+            message: err.message
+        });
 
-export { signup,login };
+    }
+
+};
+
+export { signup, verifyOTP, login };

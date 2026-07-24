@@ -126,67 +126,47 @@ const verifyOTP = async (req, res) => {
 
 // ========================= LOGIN =========================
 const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-    try {
+    const user = await User.findOne({ email });
 
-        const { email, password } = req.body;
-
-        const user = await User.findOne({ email });
-
-        if (!user) {
-            return res.status(400).json({
-                message: "Email not registered"
-            });
-        }
-
-        // Check email verification
-        if (!user.isVerified) {
-            return res.status(400).json({
-                message: "Please verify your email first."
-            });
-        }
-
-        // Check password
-        const isLogin = await bcrypt.compare(password, user.password);
-
-        if (!isLogin) {
-            return res.status(400).json({
-                message: "Invalid credentials"
-            });
-        }
-
-        // JWT Payload
-        const payload = {
-            id: user._id,
-            fullname: user.fullname,
-            email: user.email,
-            mobile: user.mobile
-        };
-
-        // Generate Token
-        const token = jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            {
-                expiresIn: process.env.JWT_EXPIRES_IN
-            }
-        );
-
-        res.status(200).json({
-            success: true,
-            message: "Login successful",
-            token
-        });
-
-    } catch (err) {
-
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-
+    if (!user) {
+      return res.status(400).json({ message: "Email not registered" });
     }
 
+    if (!user.isVerified) {
+      return res.status(400).json({ message: "Please verify your email first." });
+    }
+
+    const isLogin = await bcrypt.compare(password, user.password);
+
+    if (!isLogin) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    const payload = {
+      id: user._id,
+      fullname: user.fullname,
+      email: user.email,
+      mobile: user.mobile
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 };
 
-export { signup, verifyOTP, login };
+
+
+
+export { signup, verifyOTP, login  };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Mail, Lock, HeartPulse } from "lucide-react";
 import axios from "axios";
@@ -18,6 +18,15 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Agar token pehle se localStorage me hai, to login page skip karke dashboard pe bhej do
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      navigate("/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,6 +48,10 @@ const Login = () => {
       if (res.data.success) {
         // Save JWT token for authenticated requests
         localStorage.setItem("token", res.data.token);
+
+        // Attach token to all future axios requests
+        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+
         navigate("/dashboard");
       } else {
         setError(res.data.message || "Login failed");
